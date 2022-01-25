@@ -9,7 +9,7 @@ Creality Ender-2 profile for Slic3r 1.3.0
 
 4)
 
-Unzip Slic3r.7z; replace folders in:
+Unzip Creality Ender-2 Profiles.7z; replace folders in:
 
 C:\Users\blablabla\AppData\Roaming\Slic3r (Windows)
 
