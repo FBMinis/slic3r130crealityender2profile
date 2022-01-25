@@ -1,0 +1,42 @@
+#From PrusaSlicer 2.3.0
+#Replace in Printer Settings (press Ctrl+3 while in Slic3r)
+
+#Start G-code
+
+G90 ; use absolute coordinates
+M83 ; extruder relative mode
+M104 S[first_layer_temperature] ; set extruder temp
+M140 S[first_layer_bed_temperature] ; set bed temp
+M190 S[first_layer_bed_temperature] ; wait for bed temp
+M109 S[first_layer_temperature] ; wait for extruder temp
+G28 ; home all
+G1 Z2 F240
+G1 X2 Y10 F3000
+G1 Z0.28 F240
+G92 E0
+G1 X15 Y135 E15 F1500 ; intro line
+G1 X2.3 F5000
+G92 E0
+G1 Y10 E15 F1200 ; intro line
+G92 E0
+
+#End G-Code
+
+{if max_layer_z < max_print_height}G1 Z{z_offset+min(max_layer_z+2, max_print_height)} F600{endif} ; Move print head up
+G1 X5 Y140 F{travel_speed*60} ; present print
+{if max_layer_z < max_print_height-10}G1 Z{z_offset+min(max_layer_z+30, max_print_height-10)} F600{endif} ; Move print head further up
+M140 S0 ; turn off heatbed
+M104 S0 ; turn off temperature
+M107 ; turn off fan
+M84 X Y E ; disable motors
+
+#Before layer change G-Code
+
+;BEFORE_LAYER_CHANGE
+G92 E0
+;[layer_z]
+
+#After layer change G-Code
+
+;AFTER_LAYER_CHANGE
+;[layer_z]
